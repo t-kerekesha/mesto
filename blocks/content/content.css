@@ -1,14 +1,13 @@
 .content {
   grid-area: content;
   width: 100%;
-  padding: 40px 0 60px;
+  padding: 40px 0 67px;
   box-sizing: border-box;
   display: grid;
   grid-template-rows: min-content auto;
   grid-template-areas:
   'profile'
-  'galery'
-  '1';
+  'galery';
   justify-items: center;
 }
 
