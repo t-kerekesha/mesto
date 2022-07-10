@@ -1,0 +1,7 @@
+.galery__container-caption {
+  padding: 24px 19px 24px 21px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

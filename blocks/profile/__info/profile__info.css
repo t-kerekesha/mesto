@@ -2,7 +2,6 @@
   max-width: 350px;
   display: grid;
   box-sizing: border-box;
-  grid-template-columns: auto min-content;
   grid-template-areas:
   'name edit-button'
   'about about';
