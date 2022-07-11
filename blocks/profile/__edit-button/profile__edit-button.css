@@ -11,11 +11,6 @@
   background-size: 10px 10px;
   background-repeat: no-repeat;
   border: 1px solid #fff;
-  cursor: pointer;
-}
-
-.profile__edit-button:hover {
-  opacity: .6;
 }
 
 @media (max-width: 800px) {

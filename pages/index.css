@@ -27,3 +27,5 @@
 @import url('../blocks/galery/__like-button/_active/galery__like-button_active.css');
 /* footer */
 @import url('../blocks/footer/footer.css');
+/* button */
+@import url('../blocks/button/button.css');
