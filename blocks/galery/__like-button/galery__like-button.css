@@ -1,6 +1,7 @@
 .galery__like-button {
   min-width: 22px;
   min-height: 19px;
+  padding: 0;
   background-image: url('../../../images/like.svg');
   background-size: contain;
   background-repeat: no-repeat;

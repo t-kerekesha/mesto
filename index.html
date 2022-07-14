@@ -81,8 +81,17 @@
     </section>
   </main>
   <footer>
-    <p class="footer footer__copyright" lang="en">&copy; 2022 Mesto Russia</p>
+    <p class="footer" lang="en">&copy; 2022 Mesto Russia</p>
   </footer>
+  <div class="popup" role="dialog" aria-modal="true" tabindex="-1">
+    <button class="popup__close-button button"></button>
+    <form class="popup__container">
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input type="text" class="popup__input popup__input_type_name">
+      <input type="text" class="popup__input popup__input_type_about">
+      <button type="submit" class="popup__save-button">Сохранить</button>
+    </form>
+  </div>
   <script src="./index.js"></script>
 </body>
 </html>
