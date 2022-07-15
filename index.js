@@ -1,13 +1,15 @@
 const page = document.querySelector('.page');
 const popup = document.querySelector('.popup');
+const profile = document.querySelector('.profile');
 const closeButton = popup.querySelector('.popup__close-button');
 const saveButton = popup.querySelector('.popup__save-button');
-const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
+const addButton = profile.querySelector('.profile__add-button');
 let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
 let inputName = popup.querySelector('.popup__input_type_name');
 let inputAbout = popup.querySelector('.popup__input_type_about');
+const galeryList = document.querySelector('.galery__list');
 
 function popupOpen() {
   popup.classList.add('popup_opened');
@@ -39,6 +41,20 @@ function formSubmitHandler (evt) {
   popupClose();
 }
 
+function addImageInGalery () {
+  galeryList.insertAdjacentHTML('beforeend', `
+    <li>
+      <figure class="galery__container">
+        <img src="./images/dombay.jpg" alt="Домбай" class="galery__image">
+        <figcaption class="galery__container-caption">
+          <h2 class="galery__caption">Домбай</h2>
+          <button class="galery__like-button"></button>
+        </figcaption>
+      </figure>
+    </li>
+  `);
+} // заготовка для вставки
+
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
 popup.addEventListener('click', popupCloseLostFocus);
@@ -48,5 +64,7 @@ popup.addEventListener('keydown', function(event) {
     popupClose();
   }
 });
+
+addButton.addEventListener('click', addImageInGalery);
 
 
