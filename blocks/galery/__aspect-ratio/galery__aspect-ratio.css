@@ -1,0 +1,11 @@
+.galery__aspect-ratio {
+  display: flex;
+}
+
+.galery__aspect-ratio::after {
+  content: '';
+  width: 0;
+  height: 0;
+  margin-left: -1px;
+  padding-top: 100%;
+}

@@ -45,7 +45,9 @@ function addImageInGalery () {
   galeryList.insertAdjacentHTML('beforeend', `
     <li>
       <figure class="galery__container">
-        <img src="./images/dombay.jpg" alt="Домбай" class="galery__image">
+        <div class="galery__aspect-ratio">
+          <img src="./images/dombay.jpg" alt="Домбай" class="galery__image">
+        </div>
         <figcaption class="galery__container-caption">
           <h2 class="galery__caption">Домбай</h2>
           <button class="galery__like-button"></button>
