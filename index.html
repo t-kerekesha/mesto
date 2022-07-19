@@ -16,10 +16,10 @@
       <img src="./images/avatar.jpg" alt="Аватар" class="profile__avatar">
       <div class="profile__info">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <button class="profile__edit-button button"></button>
+        <button class="profile__edit-button button" type="button" aria-label="Редактировать"></button>
         <p class="profile__about">Исследователь океана</p>
       </div>
-      <button class="profile__add-button button"></button>
+      <button class="profile__add-button button" type="button" aria-label="Добавить картинку"></button>
     </section>
     <section class="galery">
       <ul class="galery__list">
@@ -30,7 +30,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Алтай</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -41,7 +41,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Южный Урал</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -52,7 +52,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Карелия</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -63,7 +63,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Алтай</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -74,7 +74,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Териберка, Баренцово море</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -85,7 +85,7 @@
             </div>
             <figcaption class="galery__container-caption">
               <h2 class="galery__caption">Южный Урал</h2>
-              <button class="galery__like-button"></button>
+              <button class="galery__like-button" type="button" aria-label="Лайк"></button>
             </figcaption>
           </figure>
         </li>
@@ -96,14 +96,14 @@
     <p class="footer" lang="en">&copy; 2022 Mesto Russia</p>
   </footer>
   <div class="popup" role="dialog" aria-modal="true" tabindex="-1">
-    <button class="popup__close-button button"></button>
-    <form class="popup__container">
+    <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
+    <form class="popup__container" name="Edit profile">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" class="popup__input popup__input_type_name">
-      <input type="text" class="popup__input popup__input_type_about">
+      <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя">
+      <input type="text" name="about" class="popup__input popup__input_type_about" placeholder="О себе">
       <button type="submit" class="popup__save-button">Сохранить</button>
     </form>
   </div>
-  <script src="./index.js"></script>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
