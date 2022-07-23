@@ -104,6 +104,19 @@
       <button type="submit" class="popup__save-button">Сохранить</button>
     </form>
   </div>
+  <template id="galery-item-template">
+    <li>
+      <figure class="galery__container">
+        <div class="galery__aspect-ratio">
+          <img class="galery__image">
+        </div>
+        <figcaption class="galery__container-caption">
+          <h2 class="galery__caption"></h2>
+          <button class="galery__like-button" type="button" aria-label="Лайк"></button>
+        </figcaption>
+      </figure>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
