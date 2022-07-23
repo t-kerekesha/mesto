@@ -10,7 +10,6 @@ let profileAbout = profile.querySelector('.profile__about');
 let inputName = popup.querySelector('.popup__input_type_name');
 let inputAbout = popup.querySelector('.popup__input_type_about');
 const galleryItemTemplate = document.querySelector('#gallery-item-template').content;
-// let buttonDelete = galleryItemTemplate.querySelectorAll('.gallery__delete-button');
 let galeryItem;
 
 // начальные картинки
@@ -60,6 +59,7 @@ initialItems.forEach(function(item) {
   galeryItem.querySelector('.gallery__image').src = item.link;
   galeryItem.querySelector('.gallery__caption').textContent = item.name;
   galeryItem.querySelector('.gallery__delete-button').addEventListener('click', deleteImageFromGallery);
+  galeryItem.querySelector('.gallery__like-button').addEventListener('click', likeImage);
   galeryList.prepend(galeryItem);
 });
 
@@ -67,6 +67,11 @@ initialItems.forEach(function(item) {
 function deleteImageFromGallery(event) {
   let item = event.target.closest('li');
   item.remove();
+}
+
+// лайк
+function likeImage(event) {
+  event.target.classList.toggle('gallery__like-button_active');
 }
 
 // функции работы с попап
