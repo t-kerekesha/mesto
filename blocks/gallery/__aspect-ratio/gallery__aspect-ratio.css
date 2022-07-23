@@ -1,8 +1,9 @@
-.galery__aspect-ratio {
+.gallery__aspect-ratio {
+  grid-area: image;
   display: flex;
 }
 
-.galery__aspect-ratio::after {
+.gallery__aspect-ratio::after {
   content: '';
   width: 0;
   height: 0;

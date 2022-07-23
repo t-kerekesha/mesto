@@ -1,7 +1,7 @@
 // const page = document.querySelector('.page');
 const popup = document.querySelector('.popup');
 const profile = document.querySelector('.profile');
-const galeryList = document.querySelector('.galery__list');
+const galeryList = document.querySelector('.gallery__list');
 const closeButton = popup.querySelector('.popup__close-button');
 const popupContainer = popup.querySelector('.popup__container');
 const editButton = profile.querySelector('.profile__edit-button');
@@ -9,7 +9,8 @@ let profileName = profile.querySelector('.profile__name');
 let profileAbout = profile.querySelector('.profile__about');
 let inputName = popup.querySelector('.popup__input_type_name');
 let inputAbout = popup.querySelector('.popup__input_type_about');
-const galeryItemTemplate = document.querySelector('#galery-item-template').content;
+const galleryItemTemplate = document.querySelector('#gallery-item-template').content;
+// let buttonDelete = galleryItemTemplate.querySelectorAll('.gallery__delete-button');
 let galeryItem;
 
 // начальные картинки
@@ -55,11 +56,18 @@ const initialItems = [
 // добавление начальных картинок
 
 initialItems.forEach(function(item) {
-  galeryItem = galeryItemTemplate.cloneNode(true);
-  galeryItem.querySelector('.galery__image').src = item.link;
-  galeryItem.querySelector('.galery__caption').textContent = item.name;
+  galeryItem = galleryItemTemplate.cloneNode(true);
+  galeryItem.querySelector('.gallery__image').src = item.link;
+  galeryItem.querySelector('.gallery__caption').textContent = item.name;
+  galeryItem.querySelector('.gallery__delete-button').addEventListener('click', deleteImageFromGallery);
   galeryList.prepend(galeryItem);
 });
+
+// удаление картинок
+function deleteImageFromGallery(event) {
+  let item = event.target.closest('li');
+  item.remove();
+}
 
 // функции работы с попап
 
@@ -88,6 +96,3 @@ function formSubmitHandler (evt) {
 editButton.addEventListener('click', popupOpen);
 closeButton.addEventListener('click', popupClose);
 popupContainer.addEventListener('submit', formSubmitHandler);
-
-
-

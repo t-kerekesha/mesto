@@ -1,21 +1,21 @@
-.galery__like-button {
+.gallery__like-button {
   min-width: 22px;
   min-height: 19px;
   padding: 0;
   background-image: url('../../../images/like.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-color: #fff;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   transition: opacity .1s ease-out;
 }
 
-.galery__like-button:hover {
+.gallery__like-button:hover {
   opacity: .5;
 }
 
-.galery__like-button:active {
+.gallery__like-button:active {
   background-image: url('../../../images/like-active.svg');
   opacity: 1;
 }
