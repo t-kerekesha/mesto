@@ -22,80 +22,13 @@
       <button class="profile__add-button button" type="button" aria-label="Добавить картинку"></button>
     </section>
     <section class="gallery">
-      <ul class="gallery__list">
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/altai.jpg" alt="Алтай" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Алтай</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/south-ural.jpg" alt="Южный Урал" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Южный Урал</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/kareliya.jpg" alt="Карелия" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Карелия</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/altai-mars.jpg" alt="Алтай" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Алтай</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/teriberka.jpg" alt="Териберка" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Териберка, Баренцово море</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-        <li>
-          <figure class="gallery__container">
-            <div class="gallery__aspect-ratio">
-              <img src="./images/south-ural-kurumnik.jpg" alt="Южный Урал" class="gallery__image">
-            </div>
-            <figcaption class="gallery__container-caption">
-              <h2 class="gallery__caption">Южный Урал</h2>
-              <button class="gallery__like-button" type="button" aria-label="Лайк"></button>
-            </figcaption>
-          </figure>
-        </li>
-      </ul>
+      <ul class="gallery__list"></ul>
     </section>
   </main>
   <footer>
     <p class="footer" lang="en">&copy; 2022 Mesto Russia</p>
   </footer>
-  <div class="popup" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="popup popup_type_edit-profile" role="dialog" aria-modal="true" tabindex="-1">
     <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
     <form class="popup__container" name="Edit profile">
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -104,13 +37,22 @@
       <button type="submit" class="popup__save-button">Сохранить</button>
     </form>
   </div>
+  <div class="popup popup_type_add-image" role="dialog" aria-modal="true" tabindex="-1">
+    <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
+    <form class="popup__container" name="Add image">
+      <h2 class="popup__title">Новое место</h2>
+      <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название" autofocus>
+      <input type="text" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
+      <button type="submit" class="popup__save-button">Создать</button>
+    </form>
+  </div>
   <template id="gallery-item-template">
-    <li>
+    <li class="gallery__list-item">
       <figure class="gallery__container">
         <div class="gallery__aspect-ratio">
           <img class="gallery__image">
         </div>
-        <button class="gallery__delete-button" type="button" aria-label="Удалить"></button>
+        <button class="gallery__delete-button button" type="button" aria-label="Удалить"></button>
         <figcaption class="gallery__container-caption">
           <h2 class="gallery__caption"></h2>
           <button class="gallery__like-button" type="button" aria-label="Лайк"></button>

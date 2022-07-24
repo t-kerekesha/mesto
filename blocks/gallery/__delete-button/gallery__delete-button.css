@@ -1,6 +1,7 @@
 .gallery__delete-button {
   grid-row: 1;
   grid-column: 1;
+  z-index: 1;
   max-width: min-content;
   justify-self: end;
   margin-right: 20px;
@@ -13,10 +14,4 @@
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
-  cursor: pointer;
-  transition: opacity .1s ease-out;
-}
-
-.gallery__delete-button:hover {
-  opacity: .5;
 }

@@ -1,6 +1,7 @@
 .gallery__aspect-ratio {
   grid-area: image;
   display: flex;
+  position: relative;
 }
 
 .gallery__aspect-ratio::after {
