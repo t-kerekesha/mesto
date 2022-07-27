@@ -28,7 +28,7 @@
   <footer>
     <p class="footer" lang="en">&copy; 2022 Mesto Russia</p>
   </footer>
-  <div class="popup popup_type_edit-profile" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="popup popup_type_form popup_type_edit-profile" role="dialog" aria-modal="true" tabindex="-1">
     <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
     <form class="popup__container" name="Edit profile">
       <h2 class="popup__title">Редактировать профиль</h2>
@@ -37,14 +37,21 @@
       <button type="submit" class="popup__save-button">Сохранить</button>
     </form>
   </div>
-  <div class="popup popup_type_add-image" role="dialog" aria-modal="true" tabindex="-1">
+  <div class="popup popup_type_form popup_type_add-image" role="dialog" aria-modal="true" tabindex="-1">
     <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
     <form class="popup__container" name="Add image">
       <h2 class="popup__title">Новое место</h2>
-      <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название" autofocus>
+      <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название">
       <input type="text" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
       <button type="submit" class="popup__save-button">Создать</button>
     </form>
+  </div>
+  <div class="popup popup_type_zoom-image" role="dialog" aria-modal="true" tabindex="-1">
+    <button class="popup__close-button button" type="button" aria-label="Закрыть"></button>
+    <figure class="popup__container-zoom-image">
+      <img class="popup__zoom-image">
+      <figcaption class="popup__zoom-caption"></figcaption>
+    </figure>
   </div>
   <template id="gallery-item-template">
     <li class="gallery__list-item">

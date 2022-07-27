@@ -1,6 +1,5 @@
 .gallery__delete-button {
-  grid-row: 1;
-  grid-column: 1;
+  grid-area: image;
   z-index: 1;
   max-width: min-content;
   justify-self: end;

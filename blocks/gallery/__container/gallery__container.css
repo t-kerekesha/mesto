@@ -3,7 +3,6 @@
   min-height: 361px;
   box-sizing: border-box;
   margin: 0;
-  line-height: 0;
   background-color: #fff;
   color: #000;
   border-radius: 10px;
@@ -12,5 +11,4 @@
   'image'
   'caption';
   grid-template-columns: 100%;
-  /* grid-template-rows: min-content; */
 }
