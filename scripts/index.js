@@ -6,7 +6,6 @@ const profileAbout = profile.querySelector('.profile__about');
 
 const galeryList = document.querySelector('.gallery__list');
 const galleryItemTemplate = document.querySelector('#gallery-item-template').content;
-let galeryItem;
 
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const inputName = popupEditProfile.querySelector('.popup__input_type_name');
@@ -53,11 +52,13 @@ const initialItems = [
 
 // добавление начальных картинок
 initialItems.forEach(function (item) {
-  addImageInGalery(item.name, item.link)
+  let galeryItem = createImage(item.name, item.link);
+  addImageInGalery(galeryItem);
 });
 
-// добавление картинок
-function addImageInGalery(name, link) {
+// создание картинок
+function createImage(name, link) {
+  let galeryItem;
   galeryItem = galleryItemTemplate.querySelector('.gallery__list-item').cloneNode(true);
   galeryItem.querySelector('.gallery__image').src = link;
   galeryItem.querySelector('.gallery__image').alt = name;
@@ -67,7 +68,12 @@ function addImageInGalery(name, link) {
   galeryItem.querySelector('.gallery__image').addEventListener('click', function() {
     zoomingImage(name, link);
   });
-  galeryList.prepend(galeryItem);
+  return galeryItem;
+}
+
+// добавление картинок
+function addImageInGalery(item) {
+  galeryList.prepend(item);
 }
 
 // удаление картинок
@@ -129,7 +135,8 @@ function formSubmitHandler(event) {
       saveDataProfile();
     }
     else if (event.target.closest('.popup') === popupAddImage) {
-      addImageInGalery(inputTitle.value, inputLink.value);
+      let galeryItem =createImage(inputTitle.value, inputLink.value);
+      addImageInGalery(galeryItem);
       inputTitle.value = '';
       inputLink.value = '';
     }
