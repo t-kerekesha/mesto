@@ -96,6 +96,12 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
 }
 
+function сlosePopupLostFocus(event) {
+  if (event.target === event.currentTarget) {
+    closePopup(event.target);
+  }
+}
+
 function writeDataProfile() {
   inputName.value = profileName.textContent;
   inputAbout.value = profileAbout.textContent;
@@ -148,3 +154,7 @@ closeButtons.forEach(function (button) {
     closePopup(event.target.closest('.popup'));
   });
 });
+
+popupEditProfile.addEventListener('click', сlosePopupLostFocus);
+popupAddImage.addEventListener('click', сlosePopupLostFocus);
+popupZoomImage.addEventListener('click', сlosePopupLostFocus);
