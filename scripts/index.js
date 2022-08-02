@@ -62,16 +62,21 @@ function createImage(name, link) {
   const galeryItem = galleryItemTemplate.querySelector('.gallery__list-item').cloneNode(true);
   const image = galeryItem.querySelector('.gallery__image');
   const caption = galeryItem.querySelector('.gallery__caption');
-  const deleteButton = galeryItem.querySelector('.gallery__delete-button');
-  const likeButton = galeryItem.querySelector('.gallery__like-button');
 
   image.src = link;
   image.alt = name;
   caption.textContent = name;
-  deleteButton.addEventListener('click', deleteImageFromGallery);
-  likeButton.addEventListener('click', likeImage);
-  image.addEventListener('click', function() {
-    zoomingImage(name, link);
+
+  galeryItem.addEventListener('click', function(event) {
+    if (event.target.classList.contains('gallery__delete-button')) {
+      deleteImageFromGallery(event.target.closest('.gallery__list-item'));
+    }
+    if (event.target.classList.contains('gallery__like-button')) {
+      likeImage(event.target);
+    }
+    if (event.target.classList.contains('gallery__image')) {
+      zoomingImage(name, link);
+    }
   });
   return galeryItem;
 }
@@ -82,14 +87,13 @@ function addImageInGalery(item) {
 }
 
 // удаление картинок
-function deleteImageFromGallery(event) {
-  const item = event.target.closest('.gallery__list-item');
+function deleteImageFromGallery(item) {
   item.remove();
 }
 
 // лайк
-function likeImage(event) {
-  event.target.classList.toggle('gallery__like-button_active');
+function likeImage(likeItem) {
+  likeItem.classList.toggle('gallery__like-button_active');
 }
 
 // функции работы с попап
