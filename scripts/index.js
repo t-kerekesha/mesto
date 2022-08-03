@@ -69,7 +69,7 @@ function createImage(name, link) {
 
   galeryItem.addEventListener('click', function(event) {
     if (event.target.classList.contains('gallery__delete-button')) {
-      deleteImageFromGallery(event.target.closest('.gallery__list-item'));
+      deleteImageFromGallery(galeryItem);
     }
     if (event.target.classList.contains('gallery__like-button')) {
       likeImage(event.target);
