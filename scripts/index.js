@@ -9,14 +9,14 @@ const galleryItemTemplate = document.querySelector('#gallery-item-template').con
 
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
-const popupContainerEditProfile = document.querySelector('.popup__container_type_edit-profile');
-const inputName = popupEditProfile.querySelector('.popup__input_type_name');
-const inputAbout = popupEditProfile.querySelector('.popup__input_type_about');
+const formEditProfile = document.forms.editProfile;
+const inputName = formEditProfile.elements.name;
+const inputAbout = formEditProfile.elements.about;
 
 const popupAddImage = document.querySelector('.popup_type_add-image');
-const popupContainerAddImage = document.querySelector('.popup__container_type_add-image');
-const inputTitle = popupAddImage.querySelector('.popup__input_type_name');
-const inputLink = popupAddImage.querySelector('.popup__input_type_link');
+const formAddImage = document.forms.addImage;
+const inputTitle = formAddImage.elements.name;
+const inputLink = formAddImage.elements.link;
 
 const popupZoomImage = document.querySelector('.popup_type_zoom-image');
 const zoomImage = popupZoomImage.querySelector('.popup__zoom-image');
@@ -165,6 +165,6 @@ addButton.addEventListener('click', function () {
   inputTitle.focus();
 });
 
-popupContainerEditProfile.addEventListener('submit', submitFormEditProfile);
-popupContainerAddImage.addEventListener('submit', submitFormAddImage);
+formEditProfile.addEventListener('submit', submitFormEditProfile);
+formAddImage.addEventListener('submit', submitFormAddImage);
 
