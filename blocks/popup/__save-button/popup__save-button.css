@@ -20,6 +20,14 @@
   opacity: .8;
 }
 
+.popup__save-button:disabled {
+  border: 1px solid #000;
+  background-color: transparent;
+  color: #000;
+  opacity: .2;
+  cursor: auto;
+}
+
 @media (max-width: 800px) {
   .popup__save-button {
     min-height: 46px;
