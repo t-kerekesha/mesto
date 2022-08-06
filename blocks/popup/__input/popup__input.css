@@ -1,5 +1,6 @@
 .popup__input {
   min-height: 38px;
+  margin-top: var(--row-gap);
   padding: 10px 0;
   box-sizing: border-box;
   border: none;
@@ -12,4 +13,8 @@
   white-space: nowrap;
   overflow: hidden;
   color: #000;
+}
+
+.popup__input-error_visible + .popup__input {
+  margin-top: auto;
 }

@@ -15,7 +15,7 @@ const inputAbout = formEditProfile.elements.about;
 
 const popupAddImage = document.querySelector('.popup_type_add-image');
 const formAddImage = document.forms.addImage;
-const inputTitle = formAddImage.elements.name;
+const inputTitle = formAddImage.elements.title;
 const inputLink = formAddImage.elements.link;
 
 const popupZoomImage = document.querySelector('.popup_type_zoom-image');
