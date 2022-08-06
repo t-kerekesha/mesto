@@ -99,10 +99,19 @@ function likeImage(likeItem) {
 // функции работы с попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  popup.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  popup.removeEventListener('keydown', closePopupByEsc);
+  resetForm(popup.lastElementChild);
+}
+
+function closePopupByEsc(event) {
+  if (event.key === 'Escape') {
+    closePopup(event.target.closest('.popup'));
+  }
 }
 
 function writeDataProfile() {
@@ -118,6 +127,7 @@ function saveDataProfile() {
 // увеличение картинки
 function zoomingImage(name, link) {
   openPopup(popupZoomImage);
+  popupZoomImage.focus();
   zoomImage.src = link;
   zoomImage.alt = name;
   zoomCaption.textContent = name;
@@ -138,17 +148,27 @@ function submitFormAddImage(event) {
   closePopup(event.target.closest('.popup'));
 }
 
+
+// сброс формы и валидационных сообщений
+function resetForm(form) {
+  form.reset();
+  const errors = form.querySelectorAll('.popup__input-error');
+  errors.forEach(function(error) {
+    error.textContent = '';
+    error.classList.remove('popup__input-error_visible');
+  });
+  const inputs = form.querySelectorAll('.popup__input');
+  inputs.forEach(function(input) {
+    input.classList.remove(errorClasses.inputErrorClass);
+  });
+}
+
 popups.forEach(function (popup) {
   popup.addEventListener('mousedown', function(event) {
     if (event.target.classList.contains('popup_opened')) {
       closePopup(popup);
     }
     if (event.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-  });
-  popup.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
       closePopup(popup);
     }
   });
