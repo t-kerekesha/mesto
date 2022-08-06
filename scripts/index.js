@@ -1,6 +1,6 @@
 const profile = document.querySelector('.profile');
-const editButton = profile.querySelector('.profile__edit-button');
-const addButton = profile.querySelector('.profile__add-button');
+const buttonEdit = profile.querySelector('.profile__edit-button');
+const buttonAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 
@@ -105,7 +105,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   popup.removeEventListener('keydown', closePopupByEsc);
-  resetForm(popup.lastElementChild);
 }
 
 function closePopupByEsc(event) {
@@ -159,29 +158,33 @@ function resetForm(form) {
   });
   const inputs = form.querySelectorAll('.popup__input');
   inputs.forEach(function(input) {
-    input.classList.remove(errorClasses.inputErrorClass);
+    input.classList.remove('popup__input_type_error');
   });
 }
 
 popups.forEach(function (popup) {
   popup.addEventListener('mousedown', function(event) {
-    if (event.target.classList.contains('popup_opened')) {
-      closePopup(popup);
-    }
-    if (event.target.classList.contains('popup__close-button')) {
+    if (event.target.classList.contains('popup_opened') ||
+        event.target.classList.contains('popup__close-button')) {
       closePopup(popup);
     }
   });
 });
 
-editButton.addEventListener('click', function () {
+buttonEdit.addEventListener('click', function () {
   openPopup(popupEditProfile);
+  resetForm(formEditProfile);
+  const button = formEditProfile.querySelector('.popup__save-button');
+  setDisabledState(button, false);
   writeDataProfile();
   inputName.focus();
 });
 
-addButton.addEventListener('click', function () {
+buttonAdd.addEventListener('click', function () {
   openPopup(popupAddImage);
+  resetForm(formAddImage);
+  const button = formAddImage.querySelector('.popup__save-button');
+  setDisabledState(button, true);
   inputTitle.focus();
 });
 

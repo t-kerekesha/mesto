@@ -7,4 +7,23 @@
   font-size: 12px;
   line-height: 1.25;
   color: #f00;
+  position: absolute;
+}
+
+.popup__input-error:first-of-type {
+  top: 138px;
+}
+
+.popup__input-error:nth-of-type(2) {
+  top: 195px;
+}
+
+@media (max-width: 800px) {
+  .popup__input-error:first-of-type {
+    top: 149px;
+  }
+
+  .popup__input-error:nth-of-type(2) {
+    top: 206px;
+  }
 }

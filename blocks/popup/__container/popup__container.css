@@ -12,6 +12,7 @@
   box-shadow: 0px 0px 25px #00000026;
   border-radius: 10px;
   --row-gap: calc(57px - 38px);
+  position: relative;
 }
 
 @media (max-width: 800px) {
