@@ -99,18 +99,17 @@ function likeImage(likeItem) {
 // функции работы с попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popup.addEventListener('keydown', closePopupByEsc);
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  popup.removeEventListener('keydown', closePopupByEsc);
+  document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function closePopupByEsc(event) {
   if (event.key === 'Escape') {
-    event.target.closest('.popup').focus();
-    closePopup(event.target.closest('.popup'));
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
@@ -127,7 +126,6 @@ function saveDataProfile() {
 // увеличение картинки
 function zoomingImage(name, link) {
   openPopup(popupZoomImage);
-  popupZoomImage.addEventListener('transitionend', setFocusAtEndTransition);
   zoomImage.src = link;
   zoomImage.alt = name;
   zoomCaption.textContent = name;
@@ -164,7 +162,7 @@ function resetForm(form) {
 }
 
 function setFocusAtEndTransition(event) {
-  event.target.focus();
+  event.target.querySelector('.popup__input').focus();
   this.removeEventListener('transitionend', setFocusAtEndTransition);
 }
 
