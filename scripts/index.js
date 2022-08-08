@@ -109,6 +109,7 @@ function closePopup(popup) {
 
 function closePopupByEsc(event) {
   if (event.key === 'Escape') {
+    event.target.closest('.popup').focus();
     closePopup(event.target.closest('.popup'));
   }
 }
@@ -126,7 +127,7 @@ function saveDataProfile() {
 // увеличение картинки
 function zoomingImage(name, link) {
   openPopup(popupZoomImage);
-  popupZoomImage.focus();
+  popupZoomImage.addEventListener('transitionend', setFocusAtEndTransition);
   zoomImage.src = link;
   zoomImage.alt = name;
   zoomCaption.textContent = name;
@@ -162,6 +163,11 @@ function resetForm(form) {
   });
 }
 
+function setFocusAtEndTransition(event) {
+  event.target.focus();
+  this.removeEventListener('transitionend', setFocusAtEndTransition);
+}
+
 popups.forEach(function (popup) {
   popup.addEventListener('mousedown', function(event) {
     if (event.target.classList.contains('popup_opened') ||
@@ -173,6 +179,7 @@ popups.forEach(function (popup) {
 
 buttonEdit.addEventListener('click', function () {
   openPopup(popupEditProfile);
+  popupEditProfile.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formEditProfile);
   const button = formEditProfile.querySelector('.popup__save-button');
   setDisabledState(button, false);
@@ -182,6 +189,7 @@ buttonEdit.addEventListener('click', function () {
 
 buttonAdd.addEventListener('click', function () {
   openPopup(popupAddImage);
+  popupAddImage.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formAddImage);
   const button = formAddImage.querySelector('.popup__save-button');
   setDisabledState(button, true);

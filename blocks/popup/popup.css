@@ -14,7 +14,7 @@
   '. container .';
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0.5s, opacity .5s ease-in-out;
+  transition: visibility .4s linear, opacity .4s linear;
 }
 
 @media (max-width: 800px) {
