@@ -1,3 +1,5 @@
+import Card from './Card.js';
+
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
 const buttonAdd = profile.querySelector('.profile__add-button');
@@ -5,7 +7,6 @@ const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 
 const galeryList = document.querySelector('.gallery__list');
-const galleryItemTemplate = document.querySelector('#gallery-item-template').content;
 
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -59,41 +60,14 @@ initialItems.forEach(function (item) {
 
 // создание картинок
 function createImage(name, link) {
-  const galeryItem = galleryItemTemplate.querySelector('.gallery__list-item').cloneNode(true);
-  const image = galeryItem.querySelector('.gallery__image');
-  const caption = galeryItem.querySelector('.gallery__caption');
-
-  image.src = link;
-  image.alt = name;
-  caption.textContent = name;
-
-  galeryItem.addEventListener('click', function(event) {
-    if (event.target.classList.contains('gallery__delete-button')) {
-      deleteImageFromGallery(galeryItem);
-    }
-    if (event.target.classList.contains('gallery__like-button')) {
-      likeImage(event.target);
-    }
-    if (event.target.classList.contains('gallery__image')) {
-      zoomingImage(name, link);
-    }
-  });
+  const card = new Card(name, link, '#gallery-item-template');
+  const galeryItem = card.createCard();
   return galeryItem;
 }
 
 // добавление картинок
 function addImageInGalery(item) {
   galeryList.prepend(item);
-}
-
-// удаление картинок
-function deleteImageFromGallery(item) {
-  item.remove();
-}
-
-// лайк
-function likeImage(likeItem) {
-  likeItem.classList.toggle('gallery__like-button_active');
 }
 
 // функции работы с попап
@@ -124,7 +98,7 @@ function saveDataProfile() {
 }
 
 // увеличение картинки
-function zoomingImage(name, link) {
+export function openPopupImage(name, link) {
   openPopup(popupZoomImage);
   zoomImage.src = link;
   zoomImage.alt = name;
@@ -196,4 +170,3 @@ buttonAdd.addEventListener('click', function () {
 
 formEditProfile.addEventListener('submit', submitFormEditProfile);
 formAddImage.addEventListener('submit', submitFormAddImage);
-
