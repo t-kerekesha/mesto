@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import FormValidator from './FormValidator.js';
 
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
@@ -23,6 +24,25 @@ const popupZoomImage = document.querySelector('.popup_type_zoom-image');
 const zoomImage = popupZoomImage.querySelector('.popup__zoom-image');
 const zoomCaption = popupZoomImage.querySelector('.popup__zoom-caption');
 
+const formValidatorEditProfile = new FormValidator({
+    inputClass: 'popup__input',
+    inputSelector: '.popup__input',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible',
+    submitButtonSelector: '.popup__save-button'
+  },
+  formEditProfile);
+formValidatorEditProfile.enableValidation();
+
+const formValidatorAddImage = new FormValidator({
+    inputClass: 'popup__input',
+    inputSelector: '.popup__input',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible',
+    submitButtonSelector: '.popup__save-button'
+  },
+  formAddImage);
+formValidatorAddImage.enableValidation();
 
 // начальные картинки
 const initialItems = [
@@ -154,7 +174,7 @@ buttonEdit.addEventListener('click', function () {
   popupEditProfile.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formEditProfile);
   const button = formEditProfile.querySelector('.popup__save-button');
-  setDisabledState(button, false);
+  formValidatorEditProfile.setDisabledStateButton(button, false);
   writeDataProfile();
   inputName.focus();
 });
@@ -164,7 +184,7 @@ buttonAdd.addEventListener('click', function () {
   popupAddImage.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formAddImage);
   const button = formAddImage.querySelector('.popup__save-button');
-  setDisabledState(button, true);
+  formValidatorAddImage.setDisabledStateButton(button, true);
   inputTitle.focus();
 });
 
