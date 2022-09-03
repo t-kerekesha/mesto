@@ -90,6 +90,11 @@ function addImageInGalery(item) {
   galeryList.prepend(item);
 }
 
+initialItems.forEach(function (item) {
+  const galeryItem = createCard(item.name, item.link);
+  addCardInGalery(galeryItem);
+});
+
 // функции работы с попап
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -190,3 +195,4 @@ buttonAdd.addEventListener('click', function () {
 
 formEditProfile.addEventListener('submit', submitFormEditProfile);
 formAddImage.addEventListener('submit', submitFormAddImage);
+
