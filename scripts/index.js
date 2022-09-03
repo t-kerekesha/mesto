@@ -24,25 +24,25 @@ const popupZoomImage = document.querySelector('.popup_type_zoom-image');
 const zoomImage = popupZoomImage.querySelector('.popup__zoom-image');
 const zoomCaption = popupZoomImage.querySelector('.popup__zoom-caption');
 
-const formValidatorEditProfile = new FormValidator({
-    inputClass: 'form__input',
-    inputSelector: '.form__input',
-    inputErrorClass: 'form__input_invalid',
-    errorClass: 'form__input-error_visible',
-    submitButtonSelector: '.form__save-button'
-  },
-  formEditProfile);
-formValidatorEditProfile.enableValidation();
+const validationParams = {
+  inputClass: 'form__input',
+  inputSelector: '.form__input',
+  inputErrorClass: 'form__input_invalid',
+  errorClass: 'form__input-error_visible',
+  submitButtonSelector: '.form__save-button'
+};
+const formValidators = {};
 
-const formValidatorAddImage = new FormValidator({
-    inputClass: 'form__input',
-    inputSelector: '.form__input',
-    inputErrorClass: 'form__input_invalid',
-    errorClass: 'form__input-error_visible',
-    submitButtonSelector: '.form__save-button'
-  },
-  formAddImage);
-formValidatorAddImage.enableValidation();
+function enableValidation(params) {
+  const formList = Array.from(document.forms);
+  formList.forEach((form) => {
+    const validator = new FormValidator(params, form);
+    const formName = form.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+}
+enableValidation(validationParams);
 
 // начальные картинки
 const initialItems = [
@@ -74,19 +74,19 @@ const initialItems = [
 
 // добавление начальных картинок
 initialItems.forEach(function (item) {
-  const galeryItem = createImage(item.name, item.link);
-  addImageInGalery(galeryItem);
+  const galeryItem = createCard(item.name, item.link);
+  addCardInGalery(galeryItem);
 });
 
 // создание картинок
-function createImage(name, link) {
-  const card = new Card({ name, link }, '#gallery-item-template');
+function createCard(name, link) {
+  const card = new Card({ name, link }, '#gallery-item-template', openPopupImage);
   const galeryItem = card.createCard();
   return galeryItem;
 }
 
 // добавление картинок
-function addImageInGalery(item) {
+function addCardInGalery(item) {
   galeryList.prepend(item);
 }
 
@@ -123,7 +123,7 @@ function saveDataProfile() {
 }
 
 // увеличение картинки
-export function openPopupImage(name, link) {
+function openPopupImage(name, link) {
   openPopup(popupZoomImage);
   zoomImage.src = link;
   zoomImage.alt = name;
@@ -139,30 +139,10 @@ function submitFormEditProfile(event) {
 
 function submitFormAddImage(event) {
   event.preventDefault(); // отмена стандартной отправки формы
-  const galeryItem = createImage(inputTitle.value, inputLink.value);
-  addImageInGalery(galeryItem);
+  const galeryItem = createCard(inputTitle.value, inputLink.value);
+  addCardInGalery(galeryItem);
   event.target.reset();
   closePopup(event.target.closest('.popup'));
-}
-
-
-// сброс формы и валидационных сообщений
-function resetForm(form) {
-  form.reset();
-  const errors = form.querySelectorAll('.form__input-error');
-  errors.forEach(function(error) {
-    error.textContent = '';
-    error.classList.remove('form__input-error_visible');
-  });
-  const inputs = form.querySelectorAll('.form__input');
-  inputs.forEach(function(input) {
-    input.classList.remove('form__input_invalid');
-  });
-}
-
-function setFocusAtEndTransition(event) {
-  event.currentTarget.querySelector('.form__input').focus();
-  this.removeEventListener('transitionend', setFocusAtEndTransition);
 }
 
 popups.forEach(function (popup) {
@@ -176,21 +156,21 @@ popups.forEach(function (popup) {
 
 buttonEdit.addEventListener('click', function () {
   openPopup(popupEditProfile);
-  popupEditProfile.addEventListener('transitionend', setFocusAtEndTransition);
-  resetForm(formEditProfile);
-  const button = formEditProfile.querySelector('.form__save-button');
-  formValidatorEditProfile.setDisabledStateButton(button, false);
+  formEditProfile.reset();
+  formValidators['editProfile'].resetValidation();
   writeDataProfile();
-  inputName.focus();
+  setTimeout(() => {
+    inputName.focus();
+  }, 200);
 });
 
 buttonAdd.addEventListener('click', function () {
   openPopup(popupAddImage);
-  popupAddImage.addEventListener('transitionend', setFocusAtEndTransition);
-  resetForm(formAddImage);
-  const button = formAddImage.querySelector('.form__save-button');
-  formValidatorAddImage.setDisabledStateButton(button, true);
-  inputTitle.focus();
+  formAddImage.reset();
+  formValidators['addImage'].resetValidation();
+  setTimeout(() => {
+    inputTitle.focus();
+  }, 200);
 });
 
 formEditProfile.addEventListener('submit', submitFormEditProfile);

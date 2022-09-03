@@ -10,8 +10,7 @@ export default class FormValidator {
 
   // проверка валидности формы
   _isFormValid() {
-    const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
-    return inputList.every((input) => {
+    return this._inputList.every((input) => {
       return this._isInputValid(input);
     });
   }
@@ -43,20 +42,29 @@ export default class FormValidator {
     input.classList.remove(this._inputErrorClass);
   }
 
-  setDisabledStateButton(button, bool) {
-    button.disabled = bool;
+  _setButtonState(bool) {
+    this._submitButton.disabled = bool;
   }
 
   // включение валидации
   enableValidation() {
-    const submitButton = this._form.querySelector(this._submitButtonSelector);
-    this.setDisabledStateButton(submitButton, !this._isFormValid());  // изменение состояния кнопки
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._setButtonState(!this._isFormValid());  // изменение состояния кнопки
 
     this._form.addEventListener('input', (event) => {
-      if (event.target.classList.contains(this._inputClass)) {
+      this._inputList.forEach((input) => {
         this._checkValidity(event.target);
-        this.setDisabledStateButton(submitButton, !this._isFormValid());
-      }
+        this._setButtonState(!this._isFormValid());
+      });
+    });
+  }
+
+  // сброс валидационных сообщений
+  resetValidation() {
+    this._setButtonState(!this._isFormValid());
+    this._inputList.forEach((input) => {
+      this._hideInputError(input);
     });
   }
 }
