@@ -1,9 +1,9 @@
 import { openPopupImage } from './index.js';
 
 export default class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(data, templateSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this.isLiked = false;
     this._templateSelector = templateSelector;
   }

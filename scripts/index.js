@@ -25,21 +25,21 @@ const zoomImage = popupZoomImage.querySelector('.popup__zoom-image');
 const zoomCaption = popupZoomImage.querySelector('.popup__zoom-caption');
 
 const formValidatorEditProfile = new FormValidator({
-    inputClass: 'popup__input',
-    inputSelector: '.popup__input',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_visible',
-    submitButtonSelector: '.popup__save-button'
+    inputClass: 'form__input',
+    inputSelector: '.form__input',
+    inputErrorClass: 'form__input_invalid',
+    errorClass: 'form__input-error_visible',
+    submitButtonSelector: '.form__save-button'
   },
   formEditProfile);
 formValidatorEditProfile.enableValidation();
 
 const formValidatorAddImage = new FormValidator({
-    inputClass: 'popup__input',
-    inputSelector: '.popup__input',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_visible',
-    submitButtonSelector: '.popup__save-button'
+    inputClass: 'form__input',
+    inputSelector: '.form__input',
+    inputErrorClass: 'form__input_invalid',
+    errorClass: 'form__input-error_visible',
+    submitButtonSelector: '.form__save-button'
   },
   formAddImage);
 formValidatorAddImage.enableValidation();
@@ -80,7 +80,7 @@ initialItems.forEach(function (item) {
 
 // создание картинок
 function createImage(name, link) {
-  const card = new Card(name, link, '#gallery-item-template');
+  const card = new Card({ name, link }, '#gallery-item-template');
   const galeryItem = card.createCard();
   return galeryItem;
 }
@@ -144,19 +144,19 @@ function submitFormAddImage(event) {
 // сброс формы и валидационных сообщений
 function resetForm(form) {
   form.reset();
-  const errors = form.querySelectorAll('.popup__input-error');
+  const errors = form.querySelectorAll('.form__input-error');
   errors.forEach(function(error) {
     error.textContent = '';
-    error.classList.remove('popup__input-error_visible');
+    error.classList.remove('form__input-error_visible');
   });
-  const inputs = form.querySelectorAll('.popup__input');
+  const inputs = form.querySelectorAll('.form__input');
   inputs.forEach(function(input) {
-    input.classList.remove('popup__input_type_error');
+    input.classList.remove('form__input_invalid');
   });
 }
 
 function setFocusAtEndTransition(event) {
-  event.target.querySelector('.popup__input').focus();
+  event.currentTarget.querySelector('.form__input').focus();
   this.removeEventListener('transitionend', setFocusAtEndTransition);
 }
 
@@ -173,7 +173,7 @@ buttonEdit.addEventListener('click', function () {
   openPopup(popupEditProfile);
   popupEditProfile.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formEditProfile);
-  const button = formEditProfile.querySelector('.popup__save-button');
+  const button = formEditProfile.querySelector('.form__save-button');
   formValidatorEditProfile.setDisabledStateButton(button, false);
   writeDataProfile();
   inputName.focus();
@@ -183,7 +183,7 @@ buttonAdd.addEventListener('click', function () {
   openPopup(popupAddImage);
   popupAddImage.addEventListener('transitionend', setFocusAtEndTransition);
   resetForm(formAddImage);
-  const button = formAddImage.querySelector('.popup__save-button');
+  const button = formAddImage.querySelector('.form__save-button');
   formValidatorAddImage.setDisabledStateButton(button, true);
   inputTitle.focus();
 });
