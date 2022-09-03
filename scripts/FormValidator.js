@@ -10,7 +10,6 @@ export default class FormValidator {
 
   // проверка валидности формы
   _isFormValid() {
-    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     return this._inputList.every((input) => {
       return this._isInputValid(input);
     });
@@ -50,13 +49,14 @@ export default class FormValidator {
   // включение валидации
   enableValidation() {
     this._submitButton = this._form.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     this._setButtonState(!this._isFormValid());  // изменение состояния кнопки
 
     this._form.addEventListener('input', (event) => {
-      if (event.target.classList.contains(this._inputClass)) {
+      this._inputList.forEach((input) => {
         this._checkValidity(event.target);
         this._setButtonState(!this._isFormValid());
-      }
+      });
     });
   }
 
