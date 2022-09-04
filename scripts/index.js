@@ -1,5 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
+import Section from './components/Section.js';
 
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
@@ -7,7 +8,7 @@ const buttonAdd = profile.querySelector('.profile__add-button');
 const profileName = profile.querySelector('.profile__name');
 const profileAbout = profile.querySelector('.profile__about');
 
-const galeryList = document.querySelector('.gallery__list');
+// const galeryList = document.querySelector('.gallery__list');
 
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_type_edit-profile');
@@ -72,28 +73,35 @@ const initialItems = [
   }
 ];
 
+const galeryList = new Section({
+    data: initialItems,
+    renderer: (item) => {
+      const card = new Card(item, '#gallery-item-template', openPopupImage);
+      const galeryItem = card.createCard();
+      galeryList.addItem(galeryItem);
+    }
+  },
+  '.gallery__list');
+
+galeryList.renderItems();
+
 // добавление начальных картинок
-initialItems.forEach(function (item) {
-  const galeryItem = createCard(item.name, item.link);
-  addCardInGalery(galeryItem);
-});
+// initialItems.forEach(function (item) {
+//   const galeryItem = createCard(item.name, item.link);
+//   addCardInGalery(galeryItem);
+// });
 
 // создание картинок
-function createCard(name, link) {
-  const card = new Card({ name, link }, '#gallery-item-template', openPopupImage);
-  const galeryItem = card.createCard();
-  return galeryItem;
-}
+// function createCard(name, link) {
+//   const card = new Card({ name, link }, '#gallery-item-template', openPopupImage);
+//   const galeryItem = card.createCard();
+//   return galeryItem;
+// }
 
 // добавление картинок
-function addCardInGalery(item) {
-  galeryList.prepend(item);
-}
-
-initialItems.forEach(function (item) {
-  const galeryItem = createCard(item.name, item.link);
-  addCardInGalery(galeryItem);
-});
+// function addCardInGalery(item) {
+//   galeryList.prepend(item);
+// }
 
 // функции работы с попап
 function openPopup(popup) {
@@ -139,8 +147,15 @@ function submitFormEditProfile(event) {
 
 function submitFormAddImage(event) {
   event.preventDefault(); // отмена стандартной отправки формы
-  const galeryItem = createCard(inputTitle.value, inputLink.value);
-  addCardInGalery(galeryItem);
+  const card = new Card({
+      name: inputTitle.value,
+      link: inputLink.value
+    },
+    '#gallery-item-template', openPopupImage);
+  const galeryItem = card.createCard();
+  galeryList.addItem(galeryItem);
+  // const galeryItem = createCard(inputTitle.value, inputLink.value);
+  // addCardInGalery(galeryItem);
   event.target.reset();
   closePopup(event.target.closest('.popup'));
 }
