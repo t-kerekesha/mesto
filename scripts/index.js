@@ -1,6 +1,8 @@
-import Card from './Card.js';
-import FormValidator from './FormValidator.js';
+import Card from './components/Card.js';
 import Section from './components/Section.js';
+import FormValidator from './components/FormValidator.js';
+import PopupWithForm from './components/PopupWithForm.js';
+import PopupWithImage from './components/PopupWithImage.js';
 
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
@@ -11,12 +13,12 @@ const profileAbout = profile.querySelector('.profile__about');
 // const galeryList = document.querySelector('.gallery__list');
 
 const popups = document.querySelectorAll('.popup');
-const popupEditProfile = document.querySelector('.popup_type_edit-profile');
+// const popupEditProfile = document.querySelector('.popup_type_edit-profile');
 const formEditProfile = document.forms.editProfile;
 const inputName = formEditProfile.elements.name;
 const inputAbout = formEditProfile.elements.about;
 
-const popupAddImage = document.querySelector('.popup_type_add-image');
+// const popupAddImage = document.querySelector('.popup_type_add-image');
 const formAddImage = document.forms.addImage;
 const inputTitle = formAddImage.elements.title;
 const inputLink = formAddImage.elements.link;
@@ -74,7 +76,7 @@ const initialItems = [
 ];
 
 const galeryList = new Section({
-    data: initialItems,
+    items: initialItems,
     renderer: (item) => {
       const card = new Card(item, '#gallery-item-template', openPopupImage);
       const galeryItem = card.createCard();
@@ -84,6 +86,16 @@ const galeryList = new Section({
   '.gallery__list');
 
 galeryList.renderItems();
+
+const popupEditProfile = new PopupWithForm({
+  popupSelector: '.popup_type_edit-profile',
+  handleFormSubmit: (formData) => {}
+});
+
+const popupAddImage = new PopupWithForm({
+  popupSelector: '.popup_type_add-image',
+  handleFormSubmit: (formData) => {}
+});
 
 // добавление начальных картинок
 // initialItems.forEach(function (item) {
@@ -104,21 +116,17 @@ galeryList.renderItems();
 // }
 
 // функции работы с попап
-function openPopup(popup) {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupByEsc);
-}
+// function openPopup(popup) {
 
-function closePopup(popup) {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closePopupByEsc);
-}
+// }
 
-function closePopupByEsc(event) {
-  if (event.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
+// function closePopup(popup) {
+
+// }
+
+// function closePopupByEsc(event) {
+
+// }
 
 function writeDataProfile() {
   inputName.value = profileName.textContent;
@@ -160,14 +168,9 @@ function submitFormAddImage(event) {
   closePopup(event.target.closest('.popup'));
 }
 
-popups.forEach(function (popup) {
-  popup.addEventListener('mousedown', function(event) {
-    if (event.target.classList.contains('popup_opened') ||
-        event.target.classList.contains('popup__close-button')) {
-      closePopup(popup);
-    }
-  });
-});
+// popups.forEach(function (popup) {
+
+// });
 
 buttonEdit.addEventListener('click', function () {
   openPopup(popupEditProfile);
