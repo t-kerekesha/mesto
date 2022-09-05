@@ -3,12 +3,12 @@ import Section from './components/Section.js';
 import FormValidator from './components/FormValidator.js';
 import PopupWithForm from './components/PopupWithForm.js';
 import PopupWithImage from './components/PopupWithImage.js';
+import UserInfo from './components/UserInfo.js';
 
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
 const buttonAdd = profile.querySelector('.profile__add-button');
-const profileName = profile.querySelector('.profile__name');
-const profileAbout = profile.querySelector('.profile__about');
+
 
 // const galeryList = document.querySelector('.gallery__list');
 
@@ -75,6 +75,11 @@ const initialItems = [
   }
 ];
 
+const userInfo = new UserInfo({
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about'
+});
+
 const galeryList = new Section({
     items: initialItems,
     renderer: (item) => {
@@ -89,13 +94,17 @@ galeryList.renderItems();
 
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
-  handleFormSubmit: (formData) => {}
+  handleFormSubmit: (formData) => {
+    userInfo.setUserInfo(1, 2);
+  }
 });
 
 const popupAddImage = new PopupWithForm({
   popupSelector: '.popup_type_add-image',
   handleFormSubmit: (formData) => {}
 });
+
+
 
 // добавление начальных картинок
 // initialItems.forEach(function (item) {
@@ -129,13 +138,13 @@ const popupAddImage = new PopupWithForm({
 // }
 
 function writeDataProfile() {
-  inputName.value = profileName.textContent;
-  inputAbout.value = profileAbout.textContent;
+  // inputName.value = profileName.textContent;
+  // inputAbout.value = profileAbout.textContent;
 }
 
 function saveDataProfile() {
-  profileName.textContent = inputName.value;
-  profileAbout.textContent = inputAbout.value;
+  // profileName.textContent = inputName.value;
+  // profileAbout.textContent = inputAbout.value;
 }
 
 // увеличение картинки
@@ -168,15 +177,13 @@ function submitFormAddImage(event) {
   closePopup(event.target.closest('.popup'));
 }
 
-// popups.forEach(function (popup) {
-
-// });
-
 buttonEdit.addEventListener('click', function () {
-  openPopup(popupEditProfile);
+  popupEditProfile.open();
+  userInfo.getUserInfo();
+  // openPopup(popupEditProfile);
   formEditProfile.reset();
   formValidators['editProfile'].resetValidation();
-  writeDataProfile();
+  // writeDataProfile();
   setTimeout(() => {
     inputName.focus();
   }, 200);
