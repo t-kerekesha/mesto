@@ -1,9 +1,18 @@
-import Card from './components/Card.js';
-import Section from './components/Section.js';
-import FormValidator from './components/FormValidator.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import UserInfo from './components/UserInfo.js';
+import Card from '../scripts/components/Card.js';
+import Section from '../scripts/components/Section.js';
+import FormValidator from '../scripts/components/FormValidator.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+
+import './index.css';
+
+const uralImage = new URL('../images/south-ural-kurumnik.jpg', import.meta.url);
+const teriberkaImage = new URL('../images/teriberka.jpg', import.meta.url);
+const altaiMarsImage = new URL('../images/altai-mars.jpg', import.meta.url);
+const kareliyaImage = new URL('../images/kareliya.jpg', import.meta.url);
+const southUralImage = new URL('../images/south-ural.jpg', import.meta.url);
+const altaiImage = new URL('../images/altai.jpg', import.meta.url);
 
 const profile = document.querySelector('.profile');
 const buttonEdit = profile.querySelector('.profile__edit-button');
@@ -13,27 +22,27 @@ const buttonAdd = profile.querySelector('.profile__add-button');
 const initialItems = [
   {
     name: 'Южный Урал',
-    link: './images/south-ural-kurumnik.jpg'
+    link: uralImage
   },
   {
     name: 'Териберка, Баренцово море',
-    link: './images/teriberka.jpg'
+    link: teriberkaImage
   },
   {
     name: 'Алтай',
-    link: './images/altai-mars.jpg'
+    link: altaiMarsImage
   },
   {
     name: 'Карелия',
-    link: './images/kareliya.jpg'
+    link: kareliyaImage
   },
   {
     name: 'Южный Урал',
-    link: './images/south-ural.jpg'
+    link: southUralImage
   },
   {
     name: 'Алтай',
-    link: './images/altai.jpg'
+    link: altaiImage
   }
 ];
 

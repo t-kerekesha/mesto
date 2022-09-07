@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "* Интро\r * Figma\r * Ссылка на проект\r * Планы по доработке проекта",
-  "main": "index.js",
+  "main": "./src/pages/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
