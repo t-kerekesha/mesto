@@ -1,4 +1,4 @@
-.gallery__delete-button {
+.card__delete-button {
   grid-area: image;
   z-index: 1;
   max-width: min-content;

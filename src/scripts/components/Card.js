@@ -11,11 +11,11 @@ export default class Card {
 
     this._selectors = {
       listItemSelector: '.gallery__list-item',
-      buttonLikeSelector: '.gallery__like-button',
-      buttonDeleteSelector: '.gallery__delete-button',
-      imageSelector: '.gallery__image',
-      captionSelector: '.gallery__caption',
-      likeActiveClass: 'gallery__like-button_active'
+      buttonLikeSelector: '.card__like-button',
+      buttonDeleteSelector: '.card__delete-button',
+      imageSelector: '.card__image',
+      captionSelector: '.card__caption',
+      likeActiveClass: 'card__like-button_active'
     };
   }
 

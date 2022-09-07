@@ -1,4 +1,4 @@
-.gallery__container-caption {
+.card__container-caption {
   grid-area: caption;
   padding: 24px 19px 24px 21px;
   box-sizing: border-box;

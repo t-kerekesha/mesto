@@ -1,10 +1,10 @@
-.gallery__aspect-ratio {
+.card__aspect-ratio {
   grid-area: image;
   display: flex;
   position: relative;
 }
 
-.gallery__aspect-ratio::after {
+.card__aspect-ratio::after {
   content: '';
   width: 0;
   height: 0;
