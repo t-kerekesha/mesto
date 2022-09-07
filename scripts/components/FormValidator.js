@@ -1,11 +1,15 @@
 export default class FormValidator {
   constructor(settings, form) {
-    this._inputClass = settings.inputClass;
-    this._inputSelector = settings.inputSelector;
-    this._inputErrorClass = settings.inputErrorClass;
-    this._errorClass = settings.errorClass;
-    this._submitButtonSelector = settings.submitButtonSelector;
+    this._selectors = {
+      inputClass: settings.inputClass,
+      inputSelector: settings.inputSelector,
+      inputErrorClass: settings.inputErrorClass,
+      errorClass: settings.errorClass,
+      submitButtonSelector: settings.submitButtonSelector,
+    };
     this._form = form;
+    this._submitButton = this._form.querySelector(this._selectors.submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._selectors.inputSelector));
   }
 
   // проверка валидности формы
@@ -31,15 +35,15 @@ export default class FormValidator {
   _showInputError(input, errorMessage) {
     const error = this._form.querySelector(`.${input.id}-error`);
     error.textContent = errorMessage;
-    error.classList.add(this._errorClass);
-    input.classList.add(this._inputErrorClass);
+    error.classList.add(this._selectors.errorClass);
+    input.classList.add(this._selectors.inputErrorClass);
   }
 
   _hideInputError(input) {
     const error = this._form.querySelector(`.${input.id}-error`);
     error.textContent = '';
-    error.classList.remove(this._errorClass);
-    input.classList.remove(this._inputErrorClass);
+    error.classList.remove(this._selectors.errorClass);
+    input.classList.remove(this._selectors.inputErrorClass);
   }
 
   _setButtonState(bool) {
@@ -48,8 +52,6 @@ export default class FormValidator {
 
   // включение валидации
   enableValidation() {
-    this._submitButton = this._form.querySelector(this._submitButtonSelector);
-    this._inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     this._setButtonState(!this._isFormValid());  // изменение состояния кнопки
 
     this._form.addEventListener('input', (event) => {

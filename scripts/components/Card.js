@@ -1,10 +1,10 @@
 export default class Card {
-  constructor({ name, link }, templateSelector, openZoomImage) {
+  constructor({ name, link }, { templateSelector, handleCardClick }) {
     this._name = name;
     this._link = link;
     this.isLiked = false;
     this._templateSelector = templateSelector;
-    this._openZoomImage = openZoomImage;
+    this._handleCardClick = handleCardClick;
 
     this._deleteCard = this._deleteCard.bind(this);
     this._like = this._like.bind(this);
@@ -38,7 +38,7 @@ export default class Card {
     this._buttonLike.addEventListener('click', this._like);
     this._buttonDelete.addEventListener('click', this._deleteCard);
     this._cardImage.addEventListener('click', () => {
-      this._openZoomImage(this._name, this._link);
+      this._handleCardClick(this._name, this._link);
     });
   }
 

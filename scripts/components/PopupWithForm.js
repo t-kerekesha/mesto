@@ -1,14 +1,15 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector, handleFormSubmit }) {
+  constructor({ popupSelector, form, handleFormSubmit }) {
     super({ popupSelector });
+    this._form = form;
+    this._inputList = this._popup.querySelectorAll('.form__input');
+    this._formValues = {};
     this._handleFormSubmit = handleFormSubmit;
   }
 
   _getInputValues() {
-    this._inputList = this._popup.querySelectorAll('.form__input');
-    this._formValues = {};
     this._inputList.forEach(input => {
       this._formValues[input.name] = input.value;
     });
@@ -16,15 +17,31 @@ export default class PopupWithForm extends Popup {
     return this._formValues;
   }
 
+  setInputValues(formValues) {
+    this._formValues = formValues;
+    this._inputList.forEach(input => {
+      input.value = this._formValues[input.name];
+    });
+  }
+
+  open() {
+    super.open();
+    setTimeout(() => {
+      this._inputList[0].focus();
+    }, 200);
+  }
+
   close() {
-    // event.target.reset();
     super.close();
+    this._form.reset();
   }
 
   setEventListeners() {
-    formEditProfile.addEventListener('submit', (event) => {
+    this._form.addEventListener('submit', (event) => {
       event.preventDefault(); // отмена стандартной отправки формы
       this._handleFormSubmit(this._getInputValues());
+      this.close();
     });
+    super.setEventListeners();
   }
 }
