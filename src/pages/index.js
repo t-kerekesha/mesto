@@ -5,55 +5,15 @@ import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 
+import {
+  initialItems,
+  buttonEdit,
+  buttonAdd,
+  validationParams,
+  formValidators
+} from '../utils/constants';
+
 import './index.css';
-
-const uralImage = new URL('../images/south-ural-kurumnik.jpg', import.meta.url);
-const teriberkaImage = new URL('../images/teriberka.jpg', import.meta.url);
-const altaiMarsImage = new URL('../images/altai-mars.jpg', import.meta.url);
-const kareliyaImage = new URL('../images/kareliya.jpg', import.meta.url);
-const southUralImage = new URL('../images/south-ural.jpg', import.meta.url);
-const altaiImage = new URL('../images/altai.jpg', import.meta.url);
-
-const profile = document.querySelector('.profile');
-const buttonEdit = profile.querySelector('.profile__edit-button');
-const buttonAdd = profile.querySelector('.profile__add-button');
-
-// начальные картинки
-const initialItems = [
-  {
-    name: 'Южный Урал',
-    link: uralImage
-  },
-  {
-    name: 'Териберка, Баренцово море',
-    link: teriberkaImage
-  },
-  {
-    name: 'Алтай',
-    link: altaiMarsImage
-  },
-  {
-    name: 'Карелия',
-    link: kareliyaImage
-  },
-  {
-    name: 'Южный Урал',
-    link: southUralImage
-  },
-  {
-    name: 'Алтай',
-    link: altaiImage
-  }
-];
-
-const validationParams = {
-  inputClass: 'form__input',
-  inputSelector: '.form__input',
-  inputErrorClass: 'form__input_invalid',
-  errorClass: 'form__input-error_visible',
-  submitButtonSelector: '.form__save-button'
-};
-const formValidators = {};
 
 function enableValidation(params) {
   const formList = Array.from(document.forms);
@@ -66,6 +26,20 @@ function enableValidation(params) {
 }
 enableValidation(validationParams);
 
+function createCard({ name, link }) {
+  const card = new Card({
+    name: name,
+    link: link
+  }, {
+    templateSelector: '#gallery-item-template',
+    handleCardClick: () => {
+      popupZoomImage.open(name, link);
+    }
+  });
+  const galeryItem = card.createCard();
+  return galeryItem;
+}
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   aboutSelector: '.profile__about'
@@ -74,14 +48,7 @@ const userInfo = new UserInfo({
 const galeryList = new Section({
     items: initialItems,
     renderer: (item) => {
-      const card = new Card(
-        item, {
-          templateSelector: '#gallery-item-template',
-          handleCardClick: () => {
-            popupZoomImage.open(item.name, item.link);
-          }
-      });
-      const galeryItem = card.createCard();
+      const galeryItem = createCard(item);
       galeryList.addItem(galeryItem);
     }
   },
@@ -102,16 +69,10 @@ const popupAddImage = new PopupWithForm({
   popupSelector: '.popup_type_add-image',
   form: document.forms.addImage,
   handleFormSubmit: (formData) => {
-    const card = new Card({
-        name: formData['title'],
-        link: formData['link']
-      }, {
-        templateSelector: '#gallery-item-template',
-        handleCardClick: () => {
-          popupZoomImage.open(formData['title'], formData['link']);
-        }
+    const galeryItem = createCard({
+      name: formData['title'],
+      link: formData['link']
     });
-    const galeryItem = card.createCard();
     galeryList.addItem(galeryItem);
   }
 });
