@@ -1,36 +1,28 @@
-// пути картинок
-const uralImage = new URL('../images/south-ural-kurumnik.jpg', import.meta.url);
-const teriberkaImage = new URL('../images/teriberka.jpg', import.meta.url);
-const altaiMarsImage = new URL('../images/altai-mars.jpg', import.meta.url);
-const kareliyaImage = new URL('../images/kareliya.jpg', import.meta.url);
-const southUralImage = new URL('../images/south-ural.jpg', import.meta.url);
-const altaiImage = new URL('../images/altai.jpg', import.meta.url);
-
 // начальные картинки
 export const initialItems = [
   {
     name: 'Южный Урал',
-    link: uralImage
+    link: new URL('../images/south-ural-kurumnik.jpg', import.meta.url)
   },
   {
     name: 'Териберка, Баренцово море',
-    link: teriberkaImage
+    link: new URL('../images/teriberka.jpg', import.meta.url)
   },
   {
     name: 'Алтай',
-    link: altaiMarsImage
+    link: new URL('../images/altai-mars.jpg', import.meta.url)
   },
   {
     name: 'Карелия',
-    link: kareliyaImage
+    link: new URL('../images/kareliya.jpg', import.meta.url)
   },
   {
     name: 'Южный Урал',
-    link: southUralImage
+    link: new URL('../images/south-ural.jpg', import.meta.url)
   },
   {
     name: 'Алтай',
-    link: altaiImage
+    link: new URL('../images/altai.jpg', import.meta.url)
   }
 ];
 
