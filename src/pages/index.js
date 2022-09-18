@@ -4,6 +4,7 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import UserInfo from '../scripts/components/UserInfo.js';
+import Api from '../scripts/components/Api.js';
 
 import {
   initialItems,
@@ -41,7 +42,7 @@ function createCard({ name, link }) {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  baseUrl: 'https://nomoreparties.co/v1/cohortId',
   headers: {
     authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
     'Content-Type': 'application/json'
