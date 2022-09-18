@@ -40,6 +40,14 @@ function createCard({ name, link }) {
   return galeryItem;
 }
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
+  headers: {
+    authorization: 'c56e30dc-2883-4270-a59e-b2f7bae969c6',
+    'Content-Type': 'application/json'
+  }
+});
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
   aboutSelector: '.profile__about'
@@ -52,7 +60,8 @@ const galeryList = new Section({
       galeryList.addItem(galeryItem);
     }
   },
-  '.gallery__list');
+  '.gallery__list'
+);
 
 galeryList.renderItems();
 
