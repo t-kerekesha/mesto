@@ -1,13 +1,15 @@
 export default class Card {
-  constructor({ name, link }, { templateSelector, handleCardClick }) {
+  constructor({ name, link }, { templateSelector, handleCardClick, deleteCard }) {
     this._name = name;
     this._link = link;
     this._likes = [];
+    this._owner = true;
     this.isLiked = false;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._deleteCard = deleteCard;
 
-    this._deleteCard = this._deleteCard.bind(this);
+    // this._deleteCard = this._deleteCard.bind(this);
     this._like = this._like.bind(this);
 
     this._selectors = {
@@ -67,6 +69,10 @@ export default class Card {
     this._cardCaption.textContent = this._name;
     this._counterLike.textContent = this._likes.length;
     this._setEventListeners();
+
+    if(this._owner) {
+      this._buttonDelete.classList.add('card__delete-button_visible');
+    }
 
     return this._card;
   }

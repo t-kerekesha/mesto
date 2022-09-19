@@ -35,11 +35,17 @@ function createCard({ name, link }) {
     templateSelector: '#gallery-item-template',
     handleCardClick: () => {
       popupZoomImage.open(name, link);
+    },
+    deleteCard: () => {
+      popupConfirmDelete.open();
+      // card._deleteCard();
     }
   });
   const galeryItem = card.createCard();
   return galeryItem;
 }
+
+// API
 
 const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/cohortId',
@@ -66,6 +72,8 @@ const galeryList = new Section({
 
 galeryList.renderItems();
 
+// popups
+
 const popupEditProfile = new PopupWithForm({
   popupSelector: '.popup_type_edit-profile',
   form: document.forms.editProfile,
@@ -88,12 +96,21 @@ const popupAddImage = new PopupWithForm({
 });
 popupAddImage.setEventListeners();
 
+const popupConfirmDelete = new PopupWithForm({
+  popupSelector: '.popup_type_confirm-delete',
+  form: document.forms.confirmDelete,
+  handleFormSubmit: () => {}
+});
+popupConfirmDelete.setEventListeners();
+
 const popupZoomImage = new PopupWithImage({
   popupSelector: '.popup_type_zoom-image',
   imageSelector: '.popup__zoom-image',
   captionSelector: '.popup__zoom-caption'
 });
 popupZoomImage.setEventListeners();
+
+// EventListener
 
 buttonEdit.addEventListener('click', function () {
   popupEditProfile.open();

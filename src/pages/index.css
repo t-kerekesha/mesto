@@ -24,6 +24,7 @@
 @import url('../blocks/card/__aspect-ratio/card__aspect-ratio.css');
 @import url('../blocks/card/__image/card__image.css');
 @import url('../blocks/card/__delete-button/card__delete-button.css');
+@import url('../blocks/card/__delete-button/_visible/card__delete-button_visible.css');
 @import url('../blocks/card/__container-caption/card__container-caption.css');
 @import url('../blocks/card/__caption/card__caption.css');
 @import url('../blocks/card/__like-button/card__like-button.css');
