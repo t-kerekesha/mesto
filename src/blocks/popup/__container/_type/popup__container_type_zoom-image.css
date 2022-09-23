@@ -1,6 +1,4 @@
-.popup__container-zoom-image {
-  grid-area: container;
-  box-sizing: border-box;
+.popup__container_type_zoom-image {
   margin: 0;
   max-width: 75vw;
   display: flex;

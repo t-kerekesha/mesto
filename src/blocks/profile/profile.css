@@ -1,15 +1,23 @@
 .profile {
   width: 100%;
   min-height: 120px;
-  display: flex;
   column-gap: 30px;
+  display: grid;
+  grid-template-areas:
+  'avatar profile-info button';
+  grid-template-columns: 120px auto auto;
   align-items: center;
 }
 
 @media (max-width: 800px) {
   .profile {
     width: 80%;
-    flex-direction: column;
+    grid-template-areas:
+    'avatar'
+    'profile-info'
+    'button';
+    grid-template-columns: auto;
+    justify-items: center;
     row-gap: 26px;
   }
 }

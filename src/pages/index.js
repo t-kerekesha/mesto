@@ -3,20 +3,21 @@ import Section from '../scripts/components/Section.js';
 import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupConfirmDelete from '../scripts/components/PopupConfirmDelete.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
 import {
-  initialItems,
   buttonEdit,
   buttonAdd,
+  avatarEdit,
   validationParams,
-  formValidators
+  formValidators,
+  selectors
 } from '../utils/constants';
 
 import './index.css';
-import PopupConfirmDelete from '../scripts/components/PopupConfirmDelete.js';
-import { data } from 'autoprefixer';
+// import { data } from 'autoprefixer';
 
 // API
 
@@ -31,9 +32,9 @@ const api = new Api({
 // UserInfo
 
 const userInfo = new UserInfo({
-  nameSelector: '.profile__name',
-  aboutSelector: '.profile__about',
-  avatarSelector: '.profile__avatar'
+  nameSelector: selectors.nameSelector,
+  aboutSelector: selectors.aboutSelector,
+  avatarSelector: selectors.avatarSelector
 });
 
 api.getUserInfo()
@@ -42,14 +43,14 @@ api.getUserInfo()
     userInfo.setUserInfo(data);
     userInfo.setProfileAvatar(data.avatar);
     userInfo.id = data._id;
-  });
 
-// LoadCard
+    // LoadCard
 
-api.getInitialCards()
-  .then((initialItems) => {
-    console.log(initialItems)
-    galeryList.renderItems(initialItems);
+    api.getInitialCards()
+      .then((initialItems) => {
+        console.log(initialItems)
+        galeryList.renderItems(initialItems);
+      });
   });
 
 const galeryList = new Section({
@@ -57,7 +58,7 @@ const galeryList = new Section({
     const galeryItem = createCard(item);
     galeryList.addItem(galeryItem);
   },
-  containerSelector: '.gallery__list'
+  containerSelector: selectors.containerSelector
 });
 
 // createCard
@@ -70,7 +71,7 @@ function createCard({ name, link, likes, owner, _id }) {
     owner: owner,
     cardId: _id
   }, {
-    templateSelector: '#gallery-item-template',
+    templateSelector: selectors.templateSelector,
     handleCardClick: () => {
       popupZoomImage.open(name, link);
     },
@@ -93,24 +94,29 @@ console.log(card)
 // popups
 
 const popupEditProfile = new PopupWithForm({
-  popupSelector: '.popup_type_edit-profile',
+  popupSelector: selectors.popupEditProfileSelector,
   form: document.forms.editProfile,
   handleFormSubmit: (formData) => {
+    popupEditProfile.renderLoadingData(true);
     api.editUserInfo({
       name: formData['name'],
       about: formData['about']
     })
     .then((data) => {
       userInfo.setUserInfo(data);
+    })
+    .finally(() => {
+      popupEditProfile.renderLoadingData(false);
     });
   }
 });
 popupEditProfile.setEventListeners();
 
 const popupAddImage = new PopupWithForm({
-  popupSelector: '.popup_type_add-image',
+  popupSelector: selectors.popupAddImageSelector,
   form: document.forms.addImage,
   handleFormSubmit: (formData) => {
+    popupAddImage.renderLoadingData(true);
     api.addNewCard({
       name: formData['title'],
       link: formData['link']
@@ -118,15 +124,32 @@ const popupAddImage = new PopupWithForm({
     .then((data) => {
       const galeryItem = createCard(data);
       galeryList.addItem(galeryItem);
-      // galeryList._renderer(data);
+    })
+    .finally(() => {
+      popupAddImage.renderLoadingData(false);
     });
   }
 });
 popupAddImage.setEventListeners();
 
+const popupEditAvatar = new PopupWithForm({
+  popupSelector: selectors.popupEditAvatarSelector,
+  form: document.forms.editAvatar,
+  handleFormSubmit: (formData) => {
+    popupEditAvatar.renderLoadingData(true);
+    api.editUserAvatar(formData['avatar'])
+      .then((data) => {
+        userInfo.setProfileAvatar(data.avatar);
+      })
+      .finally(() => {
+        popupEditAvatar.renderLoadingData(false);
+      });
+  }
+});
+popupEditAvatar.setEventListeners();
+
 const popupConfirmDelete = new PopupConfirmDelete({
-  popupSelector: '.popup_type_confirm-delete',
-  form: document.forms.confirmDelete,
+  popupSelector: selectors.popupConfirmDeleteSelector,
   handleConfirmDelete: (card) => {
     api.deleteCard(card.cardId)
       .then(() => {
@@ -137,9 +160,9 @@ const popupConfirmDelete = new PopupConfirmDelete({
 popupConfirmDelete.setEventListeners();
 
 const popupZoomImage = new PopupWithImage({
-  popupSelector: '.popup_type_zoom-image',
-  imageSelector: '.popup__zoom-image',
-  captionSelector: '.popup__zoom-caption'
+  popupSelector: selectors.popupZoomImageSelector,
+  imageSelector: selectors.popupImageSelector,
+  captionSelector: selectors.popupCaptionSelector
 });
 popupZoomImage.setEventListeners();
 
@@ -158,13 +181,18 @@ enableValidation(validationParams);
 
 // EventListener
 
-buttonEdit.addEventListener('click', function () {
+buttonEdit.addEventListener('click', function() {
   popupEditProfile.open();
   popupEditProfile.setInputValues(userInfo.getUserInfo());
   formValidators['editProfile'].resetValidation();
 });
 
-buttonAdd.addEventListener('click', function () {
+buttonAdd.addEventListener('click', function() {
   popupAddImage.open();
   formValidators['addImage'].resetValidation();
+});
+
+avatarEdit.addEventListener('click', function() {
+  popupEditAvatar.open();
+  formValidators['editAvatar'].resetValidation();
 });

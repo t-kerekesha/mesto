@@ -1,5 +1,5 @@
 // начальные картинки
-export const initialItems = [
+const initialItems = [
   {
     name: 'Южный Урал',
     link: new URL('../images/south-ural-kurumnik.jpg', import.meta.url)
@@ -29,6 +29,7 @@ export const initialItems = [
 const profile = document.querySelector('.profile');
 export const buttonEdit = profile.querySelector('.profile__edit-button');
 export const buttonAdd = profile.querySelector('.profile__add-button');
+export const avatarEdit = profile.querySelector('.profile__avatar-overlay');
 
 // параметры для валидации
 export const validationParams = {
@@ -40,3 +41,22 @@ export const validationParams = {
 };
 
 export const formValidators = {};
+
+// selectors
+export const selectors = {
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__about',
+  avatarSelector: '.profile__avatar',
+
+  containerSelector: '.gallery__list',
+  templateSelector: '#gallery-item-template',
+
+  popupEditProfileSelector: '.popup_type_edit-profile',
+  popupAddImageSelector: '.popup_type_add-image',
+  popupEditAvatarSelector: '.popup_type_edit-avatar',
+  popupConfirmDeleteSelector: '.popup_type_confirm-delete',
+
+  popupZoomImageSelector: '.popup_type_zoom-image',
+  popupImageSelector: '.popup__zoom-image',
+  popupCaptionSelector: '.popup__zoom-caption'
+};
