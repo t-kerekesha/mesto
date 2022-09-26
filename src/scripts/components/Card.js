@@ -1,9 +1,10 @@
 export default class Card {
   constructor({ name, link, likes, owner, cardId },
-      { templateSelector, handleCardClick, handleDeleteClick, handleLikeClick }) {
+      { templateSelector, handleCardClick, handleDeleteClick, handleLikeClick,
+        openTooltip, closeTooltip }) {
     this._name = name;
     this._link = link;
-    this._likes = likes;
+    this.likes = likes;
     this._owner = owner;
     this.cardId = cardId;
     this.isLiked = false;
@@ -11,6 +12,8 @@ export default class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeleteClick = handleDeleteClick;
     this._handleLikeClick = handleLikeClick;
+    this._openTooltip = openTooltip;
+    this._closeTooltip = closeTooltip;
 
     this.deleteCard = this.deleteCard.bind(this);
     this._like = this._like.bind(this);
@@ -53,6 +56,12 @@ export default class Card {
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
+
+    this._buttonLike.addEventListener('mouseover', (event) => {
+      this._openTooltip(event.pageX, event.pageY);
+    });
+
+    this._buttonLike.addEventListener('mouseout', this._closeTooltip);
   }
 
   // удаление картинки
@@ -76,7 +85,7 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardCaption.textContent = this._name;
-    this._counterLikes.textContent = this._likes.length;
+    this._counterLikes.textContent = this.likes.length;
     this._setEventListeners();
 
     return this._card;
@@ -88,6 +97,7 @@ export default class Card {
 
   updateCounterLikes(likes) {
     this._counterLikes.textContent = likes.length;
+    this.likes = likes;
   }
 
   renderForUser(userId) {
@@ -95,7 +105,7 @@ export default class Card {
       this.setVisibleButtonDelete();
     }
 
-    if(this._likes.find((user) => {
+    if(this.likes.find((user) => {
       return user._id === userId;
     })) {
       this._like();

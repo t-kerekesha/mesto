@@ -35,6 +35,9 @@
 @import url('../blocks/footer/footer.css');
 /* button */
 @import url('../blocks/button/button.css');
+
+@import url('../blocks/tooltip-likes/tooltip-likes.css');
+@import url('../blocks/tooltip-likes/__avatar/tooltip-likes__avatar.css');
 /* popup */
 @import url('../blocks/popup/popup.css');
 @import url('../blocks/popup/_type/popup_type_form.css');
@@ -57,3 +60,4 @@
 @import url('../blocks/form/__input-error/form__input-error.css');
 @import url('../blocks/form/__input-error/_visible/form__input-error_visible.css');
 @import url('../blocks/form/__save-button/form__save-button.css');
+

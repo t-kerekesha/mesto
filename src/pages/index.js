@@ -4,6 +4,7 @@ import FormValidator from '../scripts/components/FormValidator.js';
 import PopupWithForm from '../scripts/components/PopupWithForm.js';
 import PopupWithImage from '../scripts/components/PopupWithImage.js';
 import PopupConfirmDelete from '../scripts/components/PopupConfirmDelete.js';
+import Tooltip from '../scripts/components/Tooltip.js';
 import UserInfo from '../scripts/components/UserInfo.js';
 import Api from '../scripts/components/Api.js';
 
@@ -17,7 +18,6 @@ import {
 } from '../utils/constants';
 
 import './index.css';
-// import { data } from 'autoprefixer';
 
 // API
 
@@ -39,7 +39,6 @@ const userInfo = new UserInfo({
 
 api.getUserInfo()
   .then((data) => {
-    console.log(data)
     userInfo.setUserInfo(data);
     userInfo.setProfileAvatar(data.avatar);
     userInfo.id = data._id;
@@ -48,7 +47,6 @@ api.getUserInfo()
 
     api.getInitialCards()
       .then((initialItems) => {
-        console.log(initialItems)
         galeryList.renderItems(initialItems);
       });
   });
@@ -83,11 +81,20 @@ function createCard({ name, link, likes, owner, _id }) {
         .then((data) => {
           card.updateCounterLikes(data.likes);
         });
+    },
+    openTooltip: (pageX, pageY) => {
+      if(card.likes.length > 0) {
+        tooltipLikes.open(pageX, pageY);
+        listLikes.renderItems(card.likes);
+      }
+    },
+    closeTooltip: () => {
+      tooltipLikes.close();
+      tooltipLikes.removePreviews();
     }
   });
   const galeryItem = card.createCard();
   card.renderForUser(userInfo.id);
-console.log(card)
   return galeryItem;
 }
 
@@ -165,6 +172,17 @@ const popupZoomImage = new PopupWithImage({
   captionSelector: selectors.popupCaptionSelector
 });
 popupZoomImage.setEventListeners();
+
+const tooltipLikes = new Tooltip({
+  popupSelector: selectors.tooltipLikesSelector
+});
+const listLikes = new Section({
+  renderer: (like) => {
+    const preview = tooltipLikes.createPreview(like.avatar);
+    listLikes.addItem(preview);
+  },
+  containerSelector: selectors.tooltipLikesSelector
+});
 
 // Validation
 

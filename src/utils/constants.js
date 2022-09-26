@@ -55,6 +55,7 @@ export const selectors = {
   popupAddImageSelector: '.popup_type_add-image',
   popupEditAvatarSelector: '.popup_type_edit-avatar',
   popupConfirmDeleteSelector: '.popup_type_confirm-delete',
+  tooltipLikesSelector: '.tooltip-likes',
 
   popupZoomImageSelector: '.popup_type_zoom-image',
   popupImageSelector: '.popup__zoom-image',
