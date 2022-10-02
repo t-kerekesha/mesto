@@ -15,9 +15,10 @@ import {
   validationParams,
   formValidators,
   selectors
-} from '../utils/constants';
+} from '../utils/constants.js';
 
 import './index.css';
+import { data } from 'autoprefixer';
 
 // API
 
@@ -37,18 +38,20 @@ const userInfo = new UserInfo({
   avatarSelector: selectors.avatarSelector
 });
 
-api.getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-    userInfo.setProfileAvatar(data.avatar);
-    userInfo.id = data._id;
+api.getAllInfo()
+  .then((dataFromServer) => {
+    // UserInfo
+    const user = dataFromServer[0];
+    userInfo.setUserInfo(user);
+    userInfo.setProfileAvatar(user.avatar);
+    userInfo.id = user._id;
 
     // LoadCard
-
-    api.getInitialCards()
-      .then((initialItems) => {
-        galeryList.renderItems(initialItems);
-      });
+    const initialItems = dataFromServer[1];
+    galeryList.renderItems(initialItems);
+  })
+  .catch((error) => {
+    console.log(error);
   });
 
 const galeryList = new Section({
@@ -80,12 +83,15 @@ function createCard({ name, link, likes, owner, _id }) {
       api.likeCard(cardId, !card.isLiked)
         .then((data) => {
           card.updateCounterLikes(data.likes);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     openTooltip: (pageX, pageY) => {
       if(card.likes.length > 0) {
-        tooltipLikes.open(pageX, pageY);
         listLikes.renderItems(card.likes);
+        tooltipLikes.open(pageX, pageY);
       }
     },
     closeTooltip: () => {
@@ -112,6 +118,9 @@ const popupEditProfile = new PopupWithForm({
     .then((data) => {
       userInfo.setUserInfo(data);
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
       popupEditProfile.renderLoadingData(false);
     });
@@ -132,6 +141,9 @@ const popupAddImage = new PopupWithForm({
       const galeryItem = createCard(data);
       galeryList.addItem(galeryItem);
     })
+    .catch((error) => {
+      console.log(error);
+    })
     .finally(() => {
       popupAddImage.renderLoadingData(false);
     });
@@ -148,6 +160,9 @@ const popupEditAvatar = new PopupWithForm({
       .then((data) => {
         userInfo.setProfileAvatar(data.avatar);
       })
+      .catch((error) => {
+        console.log(error);
+      })
       .finally(() => {
         popupEditAvatar.renderLoadingData(false);
       });
@@ -161,6 +176,9 @@ const popupConfirmDelete = new PopupConfirmDelete({
     api.deleteCard(card.cardId)
       .then(() => {
         card.deleteCard();
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 });

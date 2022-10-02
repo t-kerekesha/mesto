@@ -1,6 +1,7 @@
 .tooltip-likes {
   position: absolute;
   max-width: 200px;
+  width: min-content;
   box-sizing: border-box;
   padding: 5px;
   z-index: 2;

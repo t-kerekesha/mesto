@@ -61,3 +61,14 @@ export const selectors = {
   popupImageSelector: '.popup__zoom-image',
   popupCaptionSelector: '.popup__zoom-caption'
 };
+
+export const cardSelectors = {
+  listItemSelector: '.gallery__list-item',
+  buttonLikeSelector: '.card__like-button',
+  counterLikesSelector: '.card__like-counter',
+  buttonDeleteSelector: '.card__delete-button',
+  imageSelector: '.card__image',
+  captionSelector: '.card__caption',
+  likeActiveClass: 'card__like-button_active',
+  buttonDeleteVisibleClass: 'card__delete-button_visible'
+};

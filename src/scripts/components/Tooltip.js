@@ -12,6 +12,11 @@ export default class Tooltip extends Popup {
   open(pageX, pageY) {
     this._popup.style.left = pageX + 'px';
     this._popup.style.top = pageY + 'px';
+    const coords = this._popup.getBoundingClientRect();
+    if(coords.right > document.documentElement.clientWidth) {
+      this._popup.style.left = 'auto';
+      this._popup.style.right = 0;
+    }
     super.open();
   }
 

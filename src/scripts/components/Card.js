@@ -1,3 +1,5 @@
+import { cardSelectors } from "../../utils/constants.js";
+
 export default class Card {
   constructor({ name, link, likes, owner, cardId },
       { templateSelector, handleCardClick, handleDeleteClick, handleLikeClick,
@@ -18,16 +20,7 @@ export default class Card {
     this.deleteCard = this.deleteCard.bind(this);
     this._like = this._like.bind(this);
 
-    this._selectors = {
-      listItemSelector: '.gallery__list-item',
-      buttonLikeSelector: '.card__like-button',
-      counterLikesSelector: '.card__like-counter',
-      buttonDeleteSelector: '.card__delete-button',
-      imageSelector: '.card__image',
-      captionSelector: '.card__caption',
-      likeActiveClass: 'card__like-button_active',
-      buttonDeleteVisibleClass: 'card__delete-button_visible'
-    };
+    this._selectors = cardSelectors;
   }
 
   // получение разметки картинки
@@ -67,6 +60,7 @@ export default class Card {
   // удаление картинки
   deleteCard() {
     this._card.remove();
+    this._card = null;
   }
 
   // лайк
