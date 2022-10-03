@@ -16,7 +16,6 @@ export default class PopupConfirmDelete extends Popup {
     this._popup.addEventListener('click', (event) => {
       if(event.target.classList.contains('form__save-button')) {
         this._handleConfirmDelete(this._card);
-        this.close();
       }
     });
   }

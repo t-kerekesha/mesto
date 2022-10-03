@@ -18,7 +18,7 @@ export default class Card {
     this._closeTooltip = closeTooltip;
 
     this.deleteCard = this.deleteCard.bind(this);
-    this._like = this._like.bind(this);
+    this.like = this.like.bind(this);
 
     this._selectors = cardSelectors;
   }
@@ -41,7 +41,6 @@ export default class Card {
 
     this._buttonLike.addEventListener('click', () => {
       this._handleLikeClick(this.cardId);
-      this._like();
     });
     this._buttonDelete.addEventListener('click', () => {
       this._handleDeleteClick(this);
@@ -50,11 +49,11 @@ export default class Card {
       this._handleCardClick(this._name, this._link);
     });
 
-    this._buttonLike.addEventListener('mouseover', (event) => {
+    this._buttonLike.addEventListener('mouseenter', (event) => {
       this._openTooltip(event.pageX, event.pageY);
     });
 
-    this._buttonLike.addEventListener('mouseout', this._closeTooltip);
+    this._buttonLike.addEventListener('mouseleave', this._closeTooltip);
   }
 
   // удаление картинки
@@ -64,7 +63,7 @@ export default class Card {
   }
 
   // лайк
-  _like() {
+  like() {
     this.isLiked = !this.isLiked;
     this._buttonLike.classList.toggle(this._selectors.likeActiveClass);
   }
@@ -102,7 +101,7 @@ export default class Card {
     if(this.likes.find((user) => {
       return user._id === userId;
     })) {
-      this._like();
+      this.like();
     }
   }
 }

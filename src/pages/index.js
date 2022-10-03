@@ -82,6 +82,7 @@ function createCard({ name, link, likes, owner, _id }) {
     handleLikeClick: (cardId) => {
       api.likeCard(cardId, !card.isLiked)
         .then((data) => {
+          card.like();
           card.updateCounterLikes(data.likes);
         })
         .catch((error) => {
@@ -117,6 +118,7 @@ const popupEditProfile = new PopupWithForm({
     })
     .then((data) => {
       userInfo.setUserInfo(data);
+      popupEditProfile.close();
     })
     .catch((error) => {
       console.log(error);
@@ -140,6 +142,7 @@ const popupAddImage = new PopupWithForm({
     .then((data) => {
       const galeryItem = createCard(data);
       galeryList.addItem(galeryItem);
+      popupAddImage.close();
     })
     .catch((error) => {
       console.log(error);
@@ -159,6 +162,7 @@ const popupEditAvatar = new PopupWithForm({
     api.editUserAvatar(formData['avatar'])
       .then((data) => {
         userInfo.setProfileAvatar(data.avatar);
+        popupEditAvatar.close();
       })
       .catch((error) => {
         console.log(error);
@@ -176,6 +180,7 @@ const popupConfirmDelete = new PopupConfirmDelete({
     api.deleteCard(card.cardId)
       .then(() => {
         card.deleteCard();
+        popupConfirmDelete.close();
       })
       .catch((error) => {
         console.log(error);
