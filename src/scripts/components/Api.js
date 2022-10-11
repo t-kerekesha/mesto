@@ -56,8 +56,8 @@ export default class Api {
   addNewCard({ name, link }) {
     return fetch((this._baseUrl + '/cards'), {
       method: 'POST',
-       headers: this._headers,
-       body: JSON.stringify({
+      headers: this._headers,
+      body: JSON.stringify({
         name: name,
         link: link
       })
